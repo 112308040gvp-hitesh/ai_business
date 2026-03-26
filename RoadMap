@@ -1,0 +1,210 @@
+<?php
+
+/* =====================================================
+   1. var_dump , print , print_r Example
+   ===================================================== */
+
+echo "<h3>1. var_dump , print , print_r</h3>";
+
+$name = "Hitesh";
+$age = 21;
+
+print "Name : ".$name."<br>";
+
+print_r($age);
+echo "<br>";
+
+var_dump($name);
+echo "<br><br>";
+
+
+
+/* =====================================================
+   2. Arrays Example
+   Index Array , Associative Array , Multi Dimensional
+   ===================================================== */
+
+echo "<h3>2. Arrays Example</h3>";
+
+/* Index Array */
+$colors = ["Red","Blue","Green"];
+
+echo "Index Array : ".$colors[0]."<br>";
+
+/* Associative Array */
+$student = [
+"name"=>"Hitesh",
+"age"=>21,
+"city"=>"Ahmedabad"
+];
+
+echo "Associative Array Name : ".$student["name"]."<br>";
+
+/* Multi Dimensional Array */
+
+$employees = [
+["Rahul",5000],
+["Amit",6000],
+["Neha",7000]
+];
+
+echo "Multi Array Salary : ".$employees[1][1]."<br><br>";
+
+
+
+/* =====================================================
+   3. Switch Case Example
+   ===================================================== */
+
+echo "<h3>3. Switch Example</h3>";
+
+$day = 2;
+
+switch($day){
+
+case 1:
+echo "Monday";
+break;
+
+case 2:
+echo "Tuesday";
+break;
+
+case 3:
+echo "Wednesday";
+break;
+
+default:
+echo "Invalid Day";
+
+}
+
+echo "<br><br>";
+
+
+
+/* =====================================================
+   4. Function Example
+   Parameters and Return Values
+   ===================================================== */
+
+echo "<h3>4. Function Example</h3>";
+
+function add($a,$b){
+
+$sum = $a + $b;
+
+return $sum;
+
+}
+
+$result = add(10,5);
+
+echo "Addition Result : ".$result;
+
+echo "<br><br>";
+
+
+
+/* =====================================================
+   5. Super Global Variables
+   $_GET , $_POST , $_SERVER , $_REQUEST
+   ===================================================== */
+
+echo "<h3>5. Super Globals Example</h3>";
+
+echo "Server Name : ".$_SERVER['SERVER_NAME']."<br>";
+
+if(isset($_GET['name'])){
+echo "GET Name : ".$_GET['name']."<br>";
+}
+
+if(isset($_POST['email'])){
+echo "POST Email : ".$_POST['email']."<br>";
+}
+
+if(isset($_REQUEST['city'])){
+echo "REQUEST City : ".$_REQUEST['city']."<br>";
+}
+
+echo "<br>";
+
+
+
+/* =====================================================
+   6. Form Example (GET & POST)
+   ===================================================== */
+
+echo "<h3>Form Example</h3>";
+
+?>
+
+<form method="post">
+
+Name : <input type="text" name="name"><br><br>
+
+Email : <input type="text" name="email"><br><br>
+
+City : <input type="text" name="city"><br><br>
+
+<button type="submit">Submit</button>
+
+</form>
+
+<?php
+
+
+
+/* =====================================================
+   7. Session Example
+   ===================================================== */
+
+session_start();
+
+echo "<h3>7. Session Example</h3>";
+
+$_SESSION['user'] = "Hitesh";
+
+echo "Session User : ".$_SESSION['user'];
+
+echo "<br><br>";
+
+
+
+/* =====================================================
+   8. Cookies Example
+   ===================================================== */
+
+echo "<h3>8. Cookies Example</h3>";
+
+setcookie("username","Hitesh",time()+3600);
+
+if(isset($_COOKIE['username'])){
+
+echo "Cookie Value : ".$_COOKIE['username'];
+
+}
+
+echo "<br><br>";
+
+
+
+/* =====================================================
+   9. MySQLi Database Connection Example
+   ===================================================== */
+
+echo "<h3>9. MySQLi Connection</h3>";
+
+$conn = new mysqli("localhost","root","","test");
+
+if($conn->connect_error){
+
+echo "Database Connection Failed";
+
+}else{
+
+echo "Database Connected Successfully";
+
+}
+
+?>
