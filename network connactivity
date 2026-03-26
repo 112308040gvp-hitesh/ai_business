@@ -1,0 +1,75 @@
+CREATE TABLE network_logs (
+id INT AUTO_INCREMENT PRIMARY KEY,
+protocol VARCHAR(20),
+server VARCHAR(100),
+port INT,
+status VARCHAR(20),
+checked_at DATETIME
+);
+
+-------Connectivity Check---------
+<?php
+
+$protocols = [
+["HTTP","google.com",80],
+["HTTPS","google.com",443],
+["SMTP","smtp.gmail.com",587],
+["FTP","ftp.dlptest.com",21]
+];
+
+$conn = new mysqli("localhost","root","","test");
+
+foreach($protocols as $p){
+
+$protocol = $p[0];
+$server   = $p[1];
+$port     = $p[2];
+
+$connection = @fsockopen($server,$port,$errno,$errstr,5);
+
+if($connection){
+$status="Connected";
+fclose($connection);
+}else{
+$status="Failed";
+}
+
+$sql="INSERT INTO network_logs(protocol,server,port,status,checked_at)
+VALUES('$protocol','$server','$port','$status',NOW())";
+
+$conn->query($sql);
+
+echo $protocol." : ".$status."<br>";
+
+}
+
+?>
+
+---------html---------
+
+<?php
+$result = $conn->query("SELECT * FROM network_logs");
+?>
+
+<table border="1">
+<tr>
+<th>Protocol</th>
+<th>Server</th>
+<th>Port</th>
+<th>Status</th>
+<th>Time</th>
+</tr>
+
+<?php while($row=$result->fetch_assoc()){ ?>
+
+<tr>
+<td><?php echo $row['protocol']; ?></td>
+<td><?php echo $row['server']; ?></td>
+<td><?php echo $row['port']; ?></td>
+<td><?php echo $row['status']; ?></td>
+<td><?php echo $row['checked_at']; ?></td>
+</tr>
+
+<?php } ?>
+
+</table>
